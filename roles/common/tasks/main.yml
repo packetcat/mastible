@@ -17,11 +17,8 @@
   - restart rsyslog
 - name: Add Nodesource apt key
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
-- name: Add Nodesource apt repositories
-  apt_repository: repo={{ item }} state=present
-  with_items:
-     - deb https://deb.nodesource.com/node_6.x xenial main
-     - deb-src https://deb.nodesource.com/node_6.x xenial main
+- name: Add Nodesource apt repository
+  apt_repository: repo=deb https://deb.nodesource.com/node_6.x xenial main state=present
 - name: Add Yarnpkg apt key
   apt_key: url=https://dl.yarnpkg.com/debian/pubkey.gpg state=present
 - name: Add Yarnpkg apt repository
