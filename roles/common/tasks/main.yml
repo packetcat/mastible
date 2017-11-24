@@ -23,7 +23,7 @@
      - "deb https://deb.nodesource.com/node_6.x xenial main"
      - "deb-src https://deb.nodesource.com/node_6.x xenial main"
 - name: Add Yarnpkg apt key
-  apt_key: url=https://dl.yarnpkg.com/debian/pubkey.gpg state=present
+  apt_key: url="https://dl.yarnpkg.com/debian/pubkey.gpg" state=present
 - name: Add Yarnpkg apt repository
   apt_repository: repo="deb https://dl.yarnpkg.com/debian/" stable main state=present
 # Note that we don't install nginx, letsencrypt, postgresql and redis here, that will be in different roles
