@@ -19,6 +19,7 @@
     owner: mastodon
     group: mastodon
     mode: 0644
+    backup: yes
 - name: Install ruby-build as rbenv plugin
   git:
     repo: 'https://github.com/rbenv/ruby-build.git'
