@@ -27,7 +27,7 @@
   become: true
   become_user: mastodon
 - name: Install Ruby and set it as the user's default
-  shell: /home/mastodon/.rbenv/bin/rbenv install 2.4.2 && /home/mastodon/.rbenv/bin/rbenv global 2.4.2
+  shell: /home/mastodon/.rbenv/bin/rbenv install 2.4.2 || /home/mastodon/.rbenv/bin/rbenv global 2.4.2
   args:
     executable: /bin/bash
   become: true
