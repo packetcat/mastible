@@ -1,5 +1,5 @@
 ---
 - name: Installs Mastodon on a Ubuntu 16.04 server
-
+  hosts: mastodon
   roles:
     - common
