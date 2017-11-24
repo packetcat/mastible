@@ -1,0 +1,38 @@
+---
+# All tasks in this role should be done as the mastodon user
+- name: Clone rbenv git repository
+  git:
+    repo: 'https://github.com/rbenv/rbenv.git'
+    dest: /home/mastodon/.rbenv
+  become: true
+  become_user: mastodon
+- name: Install rbenv
+  shell: cd ~/.rbenv && src/configure && make -C src
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Add rbenv to PATH
+  shell: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Add rbenv to shell startup
+  shell: echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Install ruby-build as rbenv plugin
+  git:
+    repo: 'https://github.com/rbenv/ruby-build.git'
+    dest: /home/mastodon/.rbenv/plugins/ruby-build
+  become: true
+  become_user: mastodon
+- name: Install Ruby and set it as the user's default
+  shell: rbenv install 2.4.2 && rbenv global 2.4.2
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
