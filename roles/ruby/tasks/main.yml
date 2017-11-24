@@ -12,18 +12,13 @@
     executable: /bin/bash
   become: true
   become_user: mastodon
-- name: Add rbenv to PATH
-  shell: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-  args:
-    executable: /bin/bash
-  become: true
-  become_user: mastodon
-- name: Add rbenv to shell startup
-  shell: echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-  args:
-    executable: /bin/bash
-  become: true
-  become_user: mastodon
+- name: Copy .bashrc that has correct PATH and initiation for rbenv
+  copy:
+    src: .bashrc
+    dest: /home/mastodon/.bashrc
+    owner: mastodon
+    group: mastodon
+    mode: 0644
 - name: Install ruby-build as rbenv plugin
   git:
     repo: 'https://github.com/rbenv/ruby-build.git'
