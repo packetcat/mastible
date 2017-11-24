@@ -18,44 +18,44 @@
 - name: Add Nodesource apt key
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
 - name: Add Nodesource apt repositories
-  apt_repository: repo={{item}} state=present
+  apt_repository: repo={{ item }} state=present
   with_items:
-    - deb https://deb.nodesource.com/node_6.x xenial main
-    - deb-src https://deb.nodesource.com/node_6.x xenial main
+     - deb https://deb.nodesource.com/node_6.x xenial main
+     - deb-src https://deb.nodesource.com/node_6.x xenial main
 - name: Add Yarnpkg apt key
   apt_key: url=https://dl.yarnpkg.com/debian/pubkey.gpg state=present
 - name: Add Yarnpkg apt repository
   apt-repository: repo=deb https://dl.yarnpkg.com/debian/ stable main state=present
 # Note that we don't install nginx, letsencrypt, postgresql and redis here, that will be in different roles
 - name: Update apt cache and install various dependencies
-  apt: name={{item}} state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes
   with_items:
-    - imagemagick
-    - ffmpeg
-    - libpq-dev
-    - libxml2-dev
-    - libxslt1-dev
-    - file
-    - git-core
-    - g++
-    - libprotobuf-dev
-    - protobuf-compiler
-    - pkg-config
-    - nodejs
-    - gcc
-    - autoconf
-    - bison
-    - build-essential
-    - libssl-dev
-    - libyaml-dev
-    - libreadline6-dev
-    - zlib1g-dev
-    - libncurses5-dev
-    - libffi-dev
-    - libgdbm3
-    - libgdbm-dev
-    - yarn
-    - libidn11-dev
-    - libicu-dev
+     - imagemagick
+     - ffmpeg
+     - libpq-dev
+     - libxml2-dev
+     - libxslt1-dev
+     - file
+     - git-core
+     - g++
+     - libprotobuf-dev
+     - protobuf-compiler
+     - pkg-config
+     - nodejs
+     - gcc
+     - autoconf
+     - bison
+     - build-essential
+     - libssl-dev
+     - libyaml-dev
+     - libreadline6-dev
+     - zlib1g-dev
+     - libncurses5-dev
+     - libffi-dev
+     - libgdbm3
+     - libgdbm-dev
+     - yarn
+     - libidn11-dev
+     - libicu-dev
 - name: Add mastodon system user
   user: name=mastodon state=present
