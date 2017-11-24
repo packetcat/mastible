@@ -1,9 +1,6 @@
 ---
 # This role installs packages that every Mastodon server needs and does common
 # node setup
-- name: This role installs packages that every Mastodon server needs and does common node setup
-  hosts: all
-  remote_user: root
 - name: Install python-apt, aptitude, and debconf-utils
   shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils
 - name: Do any package upgrades
