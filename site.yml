@@ -6,3 +6,6 @@
     - ruby
     - mastodon-app
     - mastodon-postgresql
+  vars_prompt:
+    - name: "mastodon_hostname"
+    - prompt: "What is your Mastodon instance's domain/sub-domain (example - mastodon.example.social)?"
