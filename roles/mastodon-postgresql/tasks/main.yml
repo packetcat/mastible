@@ -1,4 +1,4 @@
---
+---
 # This role installs the PostgreSQL server daemon and creates the mastodon
 # database user
 
