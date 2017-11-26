@@ -1,0 +1,17 @@
+--
+# This role installs the PostgreSQL server daemon and creates the mastodon
+# database user
+
+- name: Install PostgreSQL server and related packages
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+     - postgresql
+     - postgresql-contrib
+     - python-psycopg2
+- name: Add Mastodon PostgreSQL database user
+  postgresql_user:
+    name: mastodon
+    role_attr_flags: CREATEDB
+    state: present
+  become: true
+  become_user: postgres
