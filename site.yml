@@ -7,3 +7,4 @@
     - mastodon-app
     - mastodon-postgresql
     - mastodon-redis
+    - mastodon-nginx
