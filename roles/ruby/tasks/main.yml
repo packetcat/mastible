@@ -1,5 +1,7 @@
 ---
 # All tasks in this role should be done as the mastodon user
+# This role installs rbenv, ruby-build and the right version of Ruby for
+# Mastodon's use
 - name: Clone rbenv git repository
   git:
     repo: 'https://github.com/rbenv/rbenv.git'
