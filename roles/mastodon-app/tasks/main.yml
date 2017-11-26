@@ -1,0 +1,30 @@
+---
+# All tasks in this role should be done as the mastodon user
+# This role clones the Mastodon GitHub repository and installs
+# it's node.js and Ruby dependencies
+
+- name: Clone Mastodon git repository
+  git:
+    repo: 'https://github.com/tootsuite/mastodon.git'
+    dest: /home/mastodon/live
+    version: v2.0.0
+  become: true
+  become_user: mastodon
+- name: Install bundler
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/gem install bundler
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Use bundler to install the rest of the Ruby dependencies
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle install --deployment --without development test
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Use yarn to install node.js dependencies
+  shell: cd /home/mastodon/live && yarn install --pure-lockfile
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
