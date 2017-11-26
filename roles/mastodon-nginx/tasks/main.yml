@@ -26,3 +26,8 @@
     state: link
 - name: Start nginx
   service: name=nginx state=started
+- name: Copy and enable Let's Encrypt renew script
+  copy:
+    src: letsencrypt-renew.sh
+    dest: /etc/cron.daily/letsencryt-renew.sh
+    mode: 0700
