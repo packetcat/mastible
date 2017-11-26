@@ -16,10 +16,9 @@
     path: /etc/nginx/sites-enabled/default
     state: absent
 - name: Copy Mastodon nginx vhost template to sites-available
-  copy:
+  template:
     src: mastodon-nginx.conf
     dest: /etc/nginx/sites-available/{{ mastodon_hostname }}.conf
-    backup: yes
 - name: Enable Mastodon nginx vhost template
   file:
     src: /etc/nginx/sites-available/{{ mastodon_hostname }}.conf
