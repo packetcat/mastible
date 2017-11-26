@@ -10,7 +10,7 @@
 - name: Stop nginx for now
   service: name=nginx state=stopped
 - name: Generate Let's Encrypt TLS certificate for Mastodon instance
-  shell: letsencrypt certonly -n --agree-tos --standalone -d {{ mastodon_hostname }}
+  shell: letsencrypt certonly -n --agree-tos --standalone -d {{ mastodon_hostname }} --email "webmaster@{{ mastodon_hostname }}"
 - name: Remove default nginx config in sites-enabled
   file:
     path: /etc/nginx/sites-enabled/default
