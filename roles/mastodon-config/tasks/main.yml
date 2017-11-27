@@ -34,6 +34,7 @@
   template:
     src: .env.production
     dest: /home/mastodon/live/.env.production
+  ignore_errors: True
   become: true
   become_user: mastodon
 - name: Generate VAPID keys and register it
