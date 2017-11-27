@@ -8,3 +8,5 @@
     - mastodon-postgresql
     - mastodon-redis
     - mastodon-nginx
+    - mastodon-systemd
+    

@@ -1,0 +1,15 @@
+---
+# This role copies over various Mastodon service files and enables them
+
+- name: Copy Mastodon systemd service files
+  copy: src={{ item }} dest=/etc/systemd/system/{{ item }} backup=yes
+  with_items:
+     - mastodon-sidekiq.service
+     - mastodon-streaming.service
+     - mastodon-web.service
+- name: Enable Mastodon systemd services
+  systemd: name={{ item }} enabled=yes
+  with_items:
+    - mastodon-sidekiq
+    - mastodon-streaming
+    - mastodon-web
