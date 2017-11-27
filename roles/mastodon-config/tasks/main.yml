@@ -10,9 +10,10 @@
   become: true
   become_user: mastodon
 - name: Run Mastodon database setup
-  shell: cd /home/mastodon/live && RAILS_ENV=production /home/mastodon/.rbenv/shims/bundle exec rails db:setup
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails db:setup
   environment:
     RAILS_ENV: production
+    SAFETY_ASSURED: 1
   args:
     executable: /bin/bash
   become: true
