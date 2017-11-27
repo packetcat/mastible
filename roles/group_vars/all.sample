@@ -1,0 +1,4 @@
+# Specify the PostgreSQL database name you want to use for Mastodon
+# Please note that the playbook will drop this database in preparation for Mastodon's
+# database setup process.
+DB_NAME: 

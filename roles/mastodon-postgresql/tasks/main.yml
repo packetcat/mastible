@@ -15,3 +15,9 @@
     state: present
   become: true
   become_user: postgres
+- name: Drop any existing database that may exist with the same name
+  postgresql_db:
+    name: {{ DB_NAME }}
+    state: absent
+    become: true
+    become_user: postgres
