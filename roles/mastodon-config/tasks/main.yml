@@ -79,7 +79,7 @@
   become: true
   become_user: mastodon
 - name: Start Mastodon services
-  systemd: name={{ item }} state=started
+  systemd: name={{ item }} state=restarted
   with_items:
     - mastodon-sidekiq
     - mastodon-streaming
