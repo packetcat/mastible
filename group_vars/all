@@ -1,2 +1,2 @@
-# SET THIS BEFORE RUNNING PLAYBOOK
-mastodon_hostname=
+# SET THIS TO YOUR OWN INSTANCE DOMAIN/SUBDOMAIN BEFORE RUNNING PLAYBOOK
+mastodon_hostname: dev.tenforward.social
