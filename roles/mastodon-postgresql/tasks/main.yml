@@ -8,7 +8,7 @@
      - postgresql
      - postgresql-contrib
      - python-psycopg2
-- name: Stop any Mastodon services that may be running
+- name: Stop any Mastodon services that may be running to remove database locks
   systemd: name={{ item }} state=stopped
   with_items:
     - mastodon-sidekiq
