@@ -52,19 +52,19 @@
     dest: /home/mastodon/live/.env.production
   become: true
   become_user: mastodon
+- name: Precompile Mastodon static assets
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails assets:precompile
+  environment:
+    RAILS_ENV: production
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
 - name: Run Mastodon database setup
   shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails db:setup
   environment:
     RAILS_ENV: production
     SAFETY_ASSURED: 1
-  args:
-    executable: /bin/bash
-  become: true
-  become_user: mastodon
-- name: Precompile Mastodon static assets
-  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails assets:precompile
-  environment:
-    RAILS_ENV: production
   args:
     executable: /bin/bash
   become: true
