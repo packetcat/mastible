@@ -10,4 +10,4 @@
     - mastodon-nginx
     - mastodon-systemd
     - mastodon-webpush
-#   - mastodon-config
+    - mastodon-config
