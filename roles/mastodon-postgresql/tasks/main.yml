@@ -19,5 +19,5 @@
   postgresql_db:
     name: "{{ DB_NAME }}"
     state: absent
-    become: true
-    become_user: postgres
+  become: true
+  become_user: postgres
