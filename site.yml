@@ -5,8 +5,8 @@
     - common
     - ruby
     - mastodon-app
+    - mastodon-systemd
     - mastodon-postgresql
     - mastodon-redis
     - mastodon-nginx
-    - mastodon-systemd
     - mastodon-config
