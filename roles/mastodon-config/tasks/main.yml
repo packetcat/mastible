@@ -19,7 +19,7 @@
   become: true
   become_user: mastodon
 - name: Precompile Mastodon static assets
-  shell: cd /home/mastodon/live && RAILS_ENV=production /home/mastodon/.rbenv/shims/bundle exec rails assets:precompile
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails assets:precompile
   environment:
     RAILS_ENV: production
   args:
