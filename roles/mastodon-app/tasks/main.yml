@@ -11,15 +11,19 @@
   become: true
   become_user: mastodon
 - name: Install bundler
-  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/gem install bundler
+  shell: cd /home/mastodon/live && gem install bundler
   args:
     executable: /bin/bash
+  environment:
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
   become: true
   become_user: mastodon
 - name: Use bundler to install the rest of the Ruby dependencies
-  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle install --deployment --without development test
+  shell: cd /home/mastodon/live && bundle install --deployment --without development test
   args:
     executable: /bin/bash
+  environment:
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
   become: true
   become_user: mastodon
 - name: Use yarn to install node.js dependencies
