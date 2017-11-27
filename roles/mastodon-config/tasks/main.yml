@@ -1,0 +1,42 @@
+---
+# This role copies over the user-edited .env.production, runs the database
+# setup, pre-compiles assets, starts Mastodon daemons, adds media cleanup
+# cron job
+
+- name: Copy Mastodon .env.production
+  template:
+    src: .env.production
+    dest: /home/mastodon/live/.env.production
+  become: true
+  become_user: mastodon
+- name: Run Mastodon database setup
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails db:setup
+  environment:
+    RAILS_ENV: production
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Precompile Mastodon static assets
+  shell: cd /home/mastodon/live && /home/mastodon/.rbenv/shims/bundle exec rails assets:precompile
+  environment:
+    RAILS_ENV: production
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Add Mastodon media cache cleanup cronjob
+  cron:
+    name: "Mastodon media cache cleanup"
+    special_time: daily
+    job: "cd /home/mastodon/live && RAILS_ENV=production /home/mastodon/.rbenv/shims/bundle exec rake mastodon:media:remove_remote"
+    backup: yes
+    state: present
+  become: true
+  become_user: mastodon
+- name: Start Mastodon services
+  systemd: name={{ item }} state=started
+  with_items:
+    - mastodon-sidekiq
+    - mastodon-streaming
+    - mastodon-web
