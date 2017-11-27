@@ -1,0 +1,13 @@
+---
+# This role is here to install a npm package called web-push
+# We need this to allow the user of this playbook to easily Generate
+# VAPID keys on the Mastodon server. Mastodn's rake command does not work
+# out of the box without a filled out .env.production which we do not yet
+# have.
+# Package's GitHub page - https://github.com/web-push-libs/web-push/
+
+- name: Install web-push node.js library
+  npm:
+    name: web-push
+    global: yes
+    state: latest
