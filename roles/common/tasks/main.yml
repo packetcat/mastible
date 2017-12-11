@@ -57,5 +57,7 @@
      - yarn
      - libidn11-dev
      - libicu-dev
+     - libjemalloc1
+     - libjemalloc-dev
 - name: Add mastodon system user
   user: name=mastodon state=present

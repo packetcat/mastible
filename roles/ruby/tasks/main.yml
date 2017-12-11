@@ -34,5 +34,6 @@
     executable: /bin/bash
   environment:
     PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+    RUBY_CONFIGURE_OPTS: '--with-jemalloc'
   become: true
   become_user: mastodon
