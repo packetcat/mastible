@@ -33,13 +33,6 @@
     executable: /bin/bash
   become: true
   become_user: mastodon
-- name: Copy Mastodon .env.production the first time
-  template:
-    src: .env.production
-    dest: /home/mastodon/live/.env.production
-  ignore_errors: True
-  become: true
-  become_user: mastodon
 - name: Generate VAPID keys and register it
   shell: cd /home/mastodon/live && bundle exec rake mastodon:webpush:generate_vapid_key
   register: VAPID_KEYS
@@ -51,7 +44,7 @@
     executable: /bin/bash
   become: true
   become_user: mastodon
-- name: Copy Mastodon .env.production the second time
+- name: Copy Mastodon .env.production
   template:
     src: .env.production
     dest: /home/mastodon/live/.env.production
