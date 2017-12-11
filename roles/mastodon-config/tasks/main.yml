@@ -46,10 +46,9 @@
   environment:
     RAILS_ENV: production
     PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+    SECRET_KEY_BASE: '0'
   args:
     executable: /bin/bash
-  environment:
-    SECRET_KEY_BASE: '0'
   become: true
   become_user: mastodon
 - name: Copy Mastodon .env.production the second time
