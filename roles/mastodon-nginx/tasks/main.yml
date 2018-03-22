@@ -29,5 +29,5 @@
 - name: Copy and enable Let's Encrypt renew script
   copy:
     src: letsencrypt-renew.sh
-    dest: /etc/cron.daily/letsencryt-renew.sh
+    dest: /etc/cron.daily/letsencrypt-renew.sh
     mode: 0700
