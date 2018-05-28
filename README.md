@@ -4,7 +4,7 @@ An Ansible playbook to install Mastodon
 ## Requirements
 
 - Latest stable version of Ansible (this was tested with Ansible 2.4)
-- Server(s) running Ubuntu 16.04 LTS for hosting Mastodon
+- Server(s) running Ubuntu 16.04/18.04 LTS for hosting Mastodon
 
 ## Instructions for running this playbook
 
