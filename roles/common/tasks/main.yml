@@ -69,4 +69,4 @@
   with_items:
      - libgdbm5
 - name: Add mastodon system user
-  user: name=mastodon state=present
+  user: name=mastodon shell=/bin/bash state=present
