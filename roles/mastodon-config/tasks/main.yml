@@ -40,6 +40,7 @@
     RAILS_ENV: production
     PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
     SECRET_KEY_BASE: '0'
+    OTP_SECRET: '{{ OTP_SECRET.stdout }}'
   args:
     executable: /bin/bash
   become: true
