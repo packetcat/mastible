@@ -7,7 +7,7 @@
   git:
     repo: 'https://github.com/tootsuite/mastodon.git'
     dest: /home/mastodon/live
-    version: v2.4.0
+    version: v2.4.1
   become: true
   become_user: mastodon
 - name: Install bundler
