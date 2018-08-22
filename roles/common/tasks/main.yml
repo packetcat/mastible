@@ -1,20 +1,8 @@
 ---
 # This role installs packages that every Mastodon server needs and does common
 # node setup
-- name: Install python-apt, aptitude, and debconf-utils
-  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils
-- name: Do any package upgrades
-  apt: upgrade=dist
-- name: Set default locale to en_US.UTF-8
-  debconf: name=locales question='locales/default_environment_locale' value=en_US.UTF-8 vtype='select'
-- name: Generate locales
-  debconf: name=locales question='locales/locales_to_be_generated'  value='en_US.UTF-8 UTF-8' vtype='multiselect'
-- name: Set timezone area
-  debconf: name=tzdata question='tzdata/Areas' value='Etc' vtype='select'
-- name: Set timezone
-  debconf: name=tzdata question='tzdata/Zones/Etc' value='UTC' vtype='select'
-  notify:
-  - restart rsyslog
+- name: Install required ansible things
+  shell: apt-get update && apt-get -y install python-apt apt-transport-https git sudo
 - name: Add Nodesource apt key
   apt_key: url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key" state=present
 - name: Add Nodesource apt repositories
