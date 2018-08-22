@@ -58,15 +58,5 @@
      - libicu-dev
      - libjemalloc1
      - libjemalloc-dev
-- name: Install xenial specific deps
-  when: ansible_distribution_release == 'xenial'
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
-     - libgdbm3
-- name: Install bionic specific deps
-  when: ansible_distribution_release == 'bionic'
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
-     - libgdbm5
 - name: Add mastodon system user
   user: name=mastodon shell=/bin/bash state=present
