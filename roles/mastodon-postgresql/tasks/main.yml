@@ -8,12 +8,6 @@
      - postgresql
      - postgresql-contrib
      - python-psycopg2
-- name: Stop any Mastodon services that may be running to remove database locks
-  systemd: name={{ item }} state=stopped
-  with_items:
-    - mastodon-sidekiq
-    - mastodon-streaming
-    - mastodon-web
 - name: Add Mastodon PostgreSQL database user
   postgresql_user:
     name: mastodon
@@ -21,9 +15,6 @@
     state: present
   become: true
   become_user: postgres
-- name: Drop any existing database that may exist with the same name
-  postgresql_db:
-    name: "{{ DB_NAME }}"
-    state: absent
-  become: true
-  become_user: postgres
+- name: Run PostgreSQL install tasks
+  include_tasks: install.yml
+  when: install is defined

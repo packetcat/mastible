@@ -1,6 +1,5 @@
 ---
-# This role install nginx, configures it and sets up a Let's Encrypt certificate for the
-# Mastodon instance
+# This role install nginx, configures it
 
 - name: Install nginx and certbot
   apt: name={{ item }} state=latest update_cache=yes
@@ -20,16 +19,11 @@
     src: /etc/nginx/sites-available/{{ LOCAL_DOMAIN }}.conf
     dest: /etc/nginx/sites-enabled/{{ LOCAL_DOMAIN }}.conf
     state: link
-- name: Stop nginx for now
-  service: name=nginx state=stopped
-- name: Generate standalone Let's Encrypt TLS certificate for Mastodon instance
-  shell: letsencrypt certonly -n --agree-tos --standalone -d {{ LOCAL_DOMAIN }} --email "webmaster@{{ LOCAL_DOMAIN }}"
-- name: Restart nginx
-  service: name=nginx state=started
-- name: Generate webroot Let's Encrypt TLS certificate for Mastodon instance
-  shell: letsencrypt certonly -n --webroot -d {{ LOCAL_DOMAIN }} -w /home/mastodon/live/public/ --email "webmaster@{{ LOCAL_DOMAIN }}"
 - name: Copy and enable Let's Encrypt renew script
   copy:
     src: letsencrypt-renew.sh
     dest: /etc/cron.daily/letsencrypt-renew.sh
     mode: 0700
+- name: Run nginx install tasks
+  include_tasks: install.yml
+  when: install is defined
