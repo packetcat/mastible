@@ -2,3 +2,5 @@
 # Please note that the playbook will drop this database in preparation for Mastodon's
 # database setup process.
 DB_NAME: 
+# Specify the hostname you wish to use (in case it doesn't match the server's name).
+LOCAL_DOMAIN:

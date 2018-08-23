@@ -18,11 +18,11 @@
 - name: Copy Mastodon nginx vhost template to sites-available
   template:
     src: mastodon-nginx.conf
-    dest: /etc/nginx/sites-available/{{ ansible_nodename }}.conf
+    dest: /etc/nginx/sites-available/{{ LOCAL_DOMAIN }}.conf
 - name: Enable Mastodon nginx vhost template
   file:
-    src: /etc/nginx/sites-available/{{ ansible_nodename }}.conf
-    dest: /etc/nginx/sites-enabled/{{ ansible_nodename }}.conf
+    src: /etc/nginx/sites-available/{{ LOCAL_DOMAIN }}.conf
+    dest: /etc/nginx/sites-enabled/{{ LOCAL_DOMAIN }}.conf
     state: link
 - name: Start nginx
   service: name=nginx state=started
