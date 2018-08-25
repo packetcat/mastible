@@ -1,0 +1,62 @@
+---
+# This role copies over the user-edited .env.production,
+# and runs the database setup
+
+- name: Generate PAPERCLIP_SECRET and register it
+  shell: cd /home/mastodon/live && bundle exec rake secret
+  register: PAPERCLIP_SECRET
+  environment:
+    RAILS_ENV: production
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Generate SECRET_KEY_BASE and register it
+  shell: cd /home/mastodon/live && bundle exec rake secret
+  register: SECRET_KEY_BASE
+  environment:
+    RAILS_ENV: production
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Generate OTP_SECRET and register it
+  shell: cd /home/mastodon/live && bundle exec rake secret
+  register: OTP_SECRET
+  environment:
+    RAILS_ENV: production
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Generate VAPID keys and register it
+  shell: cd /home/mastodon/live && bundle exec rake mastodon:webpush:generate_vapid_key
+  register: VAPID_KEYS
+  environment:
+    RAILS_ENV: production
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+    SECRET_KEY_BASE: '0'
+    OTP_SECRET: '{{ OTP_SECRET.stdout }}'
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon
+- name: Copy Mastodon .env.production
+  template:
+    src: .env.production
+    dest: /home/mastodon/live/.env.production
+  become: true
+  become_user: mastodon
+- name: Run Mastodon database setup
+  shell: cd /home/mastodon/live && bundle exec rails db:setup
+  environment:
+    RAILS_ENV: production
+    SAFETY_ASSURED: 1
+    PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: mastodon

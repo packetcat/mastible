@@ -1,0 +1,15 @@
+---
+# This role deletes any existing PostgreSQL database
+
+- name: Stop any Mastodon services that may be running to remove database locks
+  systemd: name={{ item }} state=stopped
+  with_items:
+    - mastodon-sidekiq
+    - mastodon-streaming
+    - mastodon-web
+- name: Drop any existing database that may exist with the same name
+  postgresql_db:
+    name: "{{ DB_NAME }}"
+    state: absent
+  become: true
+  become_user: postgres

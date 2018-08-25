@@ -1,0 +1,12 @@
+---
+# This role sets up a Let's Encrypt certificate for the
+# Mastodon instance
+
+- name: Stop nginx for now
+  service: name=nginx state=stopped
+- name: Generate standalone Let's Encrypt TLS certificate for Mastodon instance
+  shell: letsencrypt certonly -n --agree-tos --standalone -d {{ LOCAL_DOMAIN }} --email "webmaster@{{ LOCAL_DOMAIN }}"
+- name: Restart nginx
+  service: name=nginx state=started
+- name: Generate webroot Let's Encrypt TLS certificate for Mastodon instance
+  shell: letsencrypt certonly -n --webroot -d {{ LOCAL_DOMAIN }} -w /home/mastodon/live/public/ --email "webmaster@{{ LOCAL_DOMAIN }}"
