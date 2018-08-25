@@ -6,7 +6,7 @@ An Ansible playbook to install Mastodon
 - Latest stable version of Ansible (this was tested with Ansible 2.4)
 - Server(s) running Ubuntu 16.04/18.04 LTS for hosting Mastodon
 
-## Instructions for running this playbook
+## Instructions for running this playbook (first time install)
 
 - Copy group_vars/all.sample to group_vars/all and edit it to specify the
   database name you wish to use with Mastodon. LOCAL_DOMAIN value is mandatory, it is your instance domain/sub-domain. **The PostgreSQL database role
@@ -21,4 +21,10 @@ An Ansible playbook to install Mastodon
 [mastodon]
 dev.example.social
 ```
+- Run the playbook with `ansible-playbook -i hosts --extra-vars='install=true' site.yml`
+
+## Instructions for using this playbook to update an existing instance
+
+- Update version number in roles/mastodon-app/tasks/main.yml
 - Run the playbook with `ansible-playbook -i hosts site.yml`
+  (**Note the lack of the install variable which is needed for installation related tasks**)
