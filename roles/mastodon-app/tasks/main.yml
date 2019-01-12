@@ -18,6 +18,12 @@
     PATH: '/home/mastodon/.rbenv/bin:/home/mastodon/.rbenv/shims:/home/mastodon/.rbenv/plugins/ruby-build/bin:{{ ansible_env.PATH }}'
   become: true
   become_user: mastodon
+- name: Remove any Gemfile.lock files
+  file:
+     name: /home/mastodon/live/Gemfile.lock
+     state: absent
+  become: true
+  become_user: mastodon
 - name: Use bundler to install the rest of the Ruby dependencies
   shell: cd /home/mastodon/live && bundle install --deployment --without development test
   args:
