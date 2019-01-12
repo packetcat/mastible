@@ -11,7 +11,7 @@
   become: true
   become_user: mastodon
 - name: Install bundler
-  shell: cd /home/mastodon/live && gem install bundler
+  shell: cd /home/mastodon/live && gem install bundler && gem install bundler -v 1.16.6
   args:
     executable: /bin/bash
   environment:
