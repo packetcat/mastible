@@ -1,10 +1,11 @@
 ---
 # This role install nginx, configures it
 
-- name: Install nginx
+- name: Install nginx and socat
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
      - nginx
+     - socat
 - name: Run nginx install tasks
   include_tasks: install.yml
   when: install is defined
