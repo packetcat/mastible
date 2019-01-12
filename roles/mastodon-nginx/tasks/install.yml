@@ -2,11 +2,11 @@
 # This role sets up a Let's Encrypt certificate for the
 # Mastodon instance
 
-- name: Stop nginx for now
-  service: name=nginx state=stopped
-- name: Generate standalone Let's Encrypt TLS certificate for Mastodon instance
-  shell: letsencrypt certonly -n --agree-tos --standalone -d {{ LOCAL_DOMAIN }} -m "webmaster@{{ LOCAL_DOMAIN }}"
-- name: Restart nginx
-  service: name=nginx state=started
-- name: Generate webroot Let's Encrypt TLS certificate for Mastodon instance
-  shell: letsencrypt certonly -n --webroot -d {{ LOCAL_DOMAIN }} -w /home/mastodon/live/public/ -m "webmaster@{{ LOCAL_DOMAIN }}"
+- name: Make TLS certificate storage directory
+  file: name=/etc/ssl/letsencrypt/ state=directory
+- name: Install acme.sh
+  shell: wget -O -  https://get.acme.sh | sh
+- name: Generate certificate using acme.sh
+  shell: acme.sh --issue --nginx -d {{ LOCAL_DOMAIN }}
+- name: Install certificate in storage directory
+  shell: acme.sh --install-cert -d {{ LOCAL_DOMAIN }} --key-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.pem --fullchain-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.crt --reloadcmd "service nginx force-reload"
