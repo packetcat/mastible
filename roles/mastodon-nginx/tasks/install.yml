@@ -7,6 +7,6 @@
 - name: Install acme.sh
   shell: wget -O -  https://get.acme.sh | sh
 - name: Generate certificate using acme.sh
-  shell: acme.sh --issue --nginx -d {{ LOCAL_DOMAIN }}
+  shell: /root/.acme.sh/acme.sh --issue --nginx -d {{ LOCAL_DOMAIN }}
 - name: Install certificate in storage directory
-  shell: acme.sh --install-cert -d {{ LOCAL_DOMAIN }} --key-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.pem --fullchain-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.crt --reloadcmd "service nginx force-reload"
+  shell: /root/.acme.sh/acme.sh --install-cert -d {{ LOCAL_DOMAIN }} --key-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.pem --fullchain-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.crt --reloadcmd "service nginx force-reload"

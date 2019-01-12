@@ -1,11 +1,10 @@
 ---
 # This role install nginx, configures it
 
-- name: Install nginx and certbot
+- name: Install nginx
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
      - nginx
-     - letsencrypt
 - name: Remove default nginx config in sites-enabled
   file:
     path: /etc/nginx/sites-enabled/default
@@ -19,11 +18,6 @@
     src: /etc/nginx/sites-available/{{ LOCAL_DOMAIN }}.conf
     dest: /etc/nginx/sites-enabled/{{ LOCAL_DOMAIN }}.conf
     state: link
-- name: Copy and enable Let's Encrypt renew script
-  copy:
-    src: letsencrypt-renew.sh
-    dest: /etc/cron.daily/letsencrypt-renew.sh
-    mode: 0700
 - name: Run nginx install tasks
   include_tasks: install.yml
   when: install is defined
