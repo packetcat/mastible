@@ -24,14 +24,6 @@
     src: letsencrypt-renew.sh
     dest: /etc/cron.daily/letsencrypt-renew.sh
     mode: 0700
-- name: Make Let's Encrypt configuration directory
-  file:
-    dest: /root/.config/letsencrypt
-    state: directory
-- name: Copy Let's Encrypt configuration file
-  copy:
-    src: cli.ini
-    dest: /root/.config/letsencrypt/cli.ini
 - name: Run nginx install tasks
   include_tasks: install.yml
   when: install is defined
