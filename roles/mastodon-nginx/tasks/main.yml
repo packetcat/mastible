@@ -5,6 +5,9 @@
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
      - nginx
+- name: Run nginx install tasks
+  include_tasks: install.yml
+  when: install is defined
 - name: Remove default nginx config in sites-enabled
   file:
     path: /etc/nginx/sites-enabled/default
@@ -18,6 +21,3 @@
     src: /etc/nginx/sites-available/{{ LOCAL_DOMAIN }}.conf
     dest: /etc/nginx/sites-enabled/{{ LOCAL_DOMAIN }}.conf
     state: link
-- name: Run nginx install tasks
-  include_tasks: install.yml
-  when: install is defined
