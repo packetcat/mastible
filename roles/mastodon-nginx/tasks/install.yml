@@ -11,7 +11,7 @@
     repo: https://github.com/Neilpang/acme.sh.git
     dest: /opt/acme.sh
 - name: Install acme.sh
-  shell: /opt/acme.sh/acme.sh --install
+  shell: cd /opt/acme.sh && ./acme.sh --install
 - name: Generate certificate using acme.sh
   shell: /root/.acme.sh/acme.sh --issue --standalone -d {{ LOCAL_DOMAIN }} --pre-hook "service nginx stop"
 - name: Install certificate in storage directory
