@@ -14,5 +14,6 @@
   shell: cd /opt/acme.sh && ./acme.sh --install
 - name: Generate certificate using acme.sh
   shell: /root/.acme.sh/acme.sh --issue --standalone -d {{ LOCAL_DOMAIN }} --pre-hook "service nginx stop"
+  ignore_errors: yes
 - name: Install certificate in storage directory
   shell: /root/.acme.sh/acme.sh --install-cert -d {{ LOCAL_DOMAIN }} --key-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.pem --fullchain-file /etc/ssl/letsencrypt/{{ LOCAL_DOMAIN }}.crt --reloadcmd "service nginx restart"
