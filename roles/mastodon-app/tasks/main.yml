@@ -3,11 +3,24 @@
 # This role clones the Mastodon GitHub repository and installs
 # it's node.js and Ruby dependencies
 
-- name: Clone Mastodon git repository
+- name: Clone Mastodon git repository [1st clone]
   git:
     repo: 'https://github.com/tootsuite/mastodon.git'
     dest: /home/mastodon/live
-    version: v2.6.5
+  become: true
+  become_user: mastodon
+- name: Get latest version as an Ansible variable
+  shell: cd /home/mastodon/live && git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1
+  become: true
+  become_user: mastodon
+  args:
+    executable: /bin/bash
+  register: MASTODON_VERSION
+- name: Checkout latest Mastodon version
+  git:
+    repo: 'https://github.com/tootsuite/mastodon.git'
+    dest: /home/mastodon/live
+    version: {{ MASTODON_VERSION }}
   become: true
   become_user: mastodon
 - name: Install bundler
