@@ -20,7 +20,7 @@
   git:
     repo: 'https://github.com/tootsuite/mastodon.git'
     dest: /home/mastodon/live
-    version: "{{ MASTODON_VERSION }}"
+    version: MASTODON_VERSION
   become: true
   become_user: mastodon
 - name: Install bundler
