@@ -4,8 +4,14 @@
 
 - name: Make TLS certificate storage directory
   file: name=/etc/ssl/letsencrypt/ state=directory
+- name: Make sure /opt exists
+  file: name=/opt state=directory
+- name: Clone acme.sh repository
+  git:
+    repo: https://github.com/Neilpang/acme.sh.git
+    dest: /opt/acme.sh
 - name: Install acme.sh
-  shell: wget -O -  https://get.acme.sh | sh
+  shell: /opt/acme.sh/acme.sh --install
 - name: Generate certificate using acme.sh
   shell: /root/.acme.sh/acme.sh --issue --standalone -d {{ LOCAL_DOMAIN }} --pre-hook "service nginx stop"
 - name: Install certificate in storage directory
