@@ -29,7 +29,7 @@
   become: true
   become_user: mastodon
 - name: Install Ruby and set it as the user's default
-  shell: rbenv install 2.5.3 || rbenv global 2.5.3
+  shell: rbenv install 2.6.0 || rbenv global 2.6.0
   args:
     executable: /bin/bash
   environment:
