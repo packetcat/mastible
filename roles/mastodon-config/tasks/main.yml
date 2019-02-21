@@ -28,7 +28,7 @@
   cron:
     name: "Mastodon media cache cleanup"
     special_time: daily
-    job: "cd /home/mastodon/live && RAILS_ENV=production /home/mastodon/.rbenv/shims/bundle exec /home/mastodon/live/bin/tootctl media remove
+    job: "cd /home/mastodon/live && RAILS_ENV=production /home/mastodon/.rbenv/shims/bundle exec /home/mastodon/live/bin/tootctl media remove"
     backup: yes
     state: present
   become: true
