@@ -16,8 +16,9 @@
   apt_repository: repo="deb https://dl.yarnpkg.com/debian/ stable main" state=present
 # Note that we don't install nginx, letsencrypt, postgresql and redis here, that will be in different roles
 - name: Update apt cache and install various dependencies
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
+  apt: name={{ packages }} state=latest update_cache=yes
+  vars:
+    packages:
      - imagemagick
      - ffmpeg
      - libpq-dev

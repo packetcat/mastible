@@ -3,8 +3,9 @@
 # database user
 
 - name: Install PostgreSQL server and related packages
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
+  apt: name={{ packages }} state=latest update_cache=yes
+  vars:
+    packages:
      - postgresql
      - postgresql-contrib
      - python-psycopg2

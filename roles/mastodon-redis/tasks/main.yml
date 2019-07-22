@@ -2,7 +2,8 @@
 # This playbook installs Redis for Mastodon's user
 
 - name: Install redis
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
+  apt: name={{ packages }} state=latest update_cache=yes
+  vars:
+    packages:
      - redis-tools
      - redis-server
