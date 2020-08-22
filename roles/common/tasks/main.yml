@@ -17,6 +17,7 @@
 # Note that we don't install nginx, letsencrypt, postgresql and redis here, that will be in different roles
 - name: Update apt cache and install various dependencies
   apt: name={{ packages }} state=latest update_cache=yes
+  when: ansible_distribution_release == 'bionic'
   vars:
     packages:
      - imagemagick
@@ -46,6 +47,39 @@
      - libidn11-dev
      - libicu-dev
      - libjemalloc1
+     - libjemalloc-dev
+- name: Update apt cache and install various dependencies
+  apt: name={{ packages }} state=latest update_cache=yes
+  when: ansible_distribution_release == 'focal'
+  vars:
+    packages:
+     - imagemagick
+     - ffmpeg
+     - libpq-dev
+     - libxml2-dev
+     - libxslt1-dev
+     - file
+     - git-core
+     - g++
+     - libprotobuf-dev
+     - protobuf-compiler
+     - pkg-config
+     - nodejs
+     - gcc
+     - autoconf
+     - bison
+     - build-essential
+     - libssl-dev
+     - libyaml-dev
+     - libreadline6-dev
+     - zlib1g-dev
+     - libncurses5-dev
+     - libffi-dev
+     - libgdbm-dev
+     - yarn
+     - libidn11-dev
+     - libicu-dev
+     - libjemalloc2
      - libjemalloc-dev
 - name: Add mastodon system user
   user: name=mastodon shell=/bin/bash state=present
