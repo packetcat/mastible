@@ -33,9 +33,10 @@
     state: present
   become: true
   become_user: mastodon
-- name: (Re)Start Mastodon services
+- name: (Re)Start Mastodon services and nginx
   systemd: name={{ item }} state=restarted
   with_items:
     - mastodon-sidekiq
     - mastodon-streaming
     - mastodon-web
+    - nginx
