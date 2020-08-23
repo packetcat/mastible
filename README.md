@@ -8,7 +8,8 @@ An Ansible playbook to install Mastodon
 
 ## Testing status
 
-Mastible was tested on 20/08/2020 with Ansible 2.9.12 on a Ubuntu 20.04 server.
+Mastible was tested on 20/08/2020 with Ansible 2.9.12 running against
+a Ubuntu 20.04 server.
 
 ## Instructions for running this playbook (first time install)
 
