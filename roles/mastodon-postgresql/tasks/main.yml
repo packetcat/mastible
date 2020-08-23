@@ -4,11 +4,20 @@
 
 - name: Install PostgreSQL server and related packages
   apt: name={{ packages }} state=latest update_cache=yes
+  when: ansible_distribution_release == 'bionic'
   vars:
     packages:
      - postgresql
      - postgresql-contrib
      - python-psycopg2
+- name: Install PostgreSQL server and related packages
+  apt: name={{ packages }} state=latest update_cache=yes
+  when: ansible_distribution_release == 'focal'
+  vars:
+    packages:
+     - postgresql
+     - postgresql-contrib
+     - python3-psycopg2
 - name: Add Mastodon PostgreSQL database user
   postgresql_user:
     name: mastodon
